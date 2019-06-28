@@ -407,7 +407,7 @@
 
 			<plugin>
 			   <groupId>org.sonatype.plugins</groupId>
-			   <artifactId>nexus-staging-maven-plugin</artifactId>
+			   <artifactId>nexus-test-test-test</artifactId>
 			   <version>1.5.1</version>
 			   <executions>
 			      <execution>
