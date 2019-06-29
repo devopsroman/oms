@@ -1,5 +1,3 @@
-#!/bin/env groovy
-pipeline {
 node {  
     stage('Clone sources') {
         git url: 'https://github.com/devopsroman/oms.git'
@@ -7,5 +5,4 @@ node {
     stage ('Build OMS') {
         sh 'mvn clean install'
     }
-}
 }
