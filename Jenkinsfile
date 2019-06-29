@@ -1,4 +1,3 @@
-pipeline{
 agent any
 node {  
     stage('Clone sources') {
@@ -10,6 +9,5 @@ node {
     stage ('Upload WAR-file to nexus') {
         sh 'mvn clean deploy'  
     }
-}
 }
 
