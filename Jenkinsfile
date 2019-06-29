@@ -1,3 +1,5 @@
+pipeline{
+agent any
 node {  
     stage('Clone sources') {
         git url: 'https://github.com/devopsroman/oms.git'
@@ -9,5 +11,5 @@ node {
         sh 'mvn clean deploy'  
     }
 }
-
+}
 
