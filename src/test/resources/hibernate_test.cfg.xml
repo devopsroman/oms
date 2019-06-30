@@ -15,7 +15,7 @@
 
 
                 <property name="hibernate.connection.url">${IP_MySQL_DB_APACHE}</property>
-                <property name="hibernate.connection.username">${NAME_MySQL_DB_APACHE}</property>
+                <property name="hibernate.connection.username">${USER_MySQL_DB_APACHE}</property>
                 <property name="hibernate.connection.password">${PASS_MySQL_DB_APACHE}</property>
 
 
