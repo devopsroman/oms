@@ -1,4 +1,4 @@
-node {  
+node(`centos`) {  
     stage('Clone sources') {
         git url: 'https://github.com/devopsroman/oms.git'
     }
