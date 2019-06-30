@@ -9,9 +9,15 @@
 		<!-- local connection properties -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
-		<property name="hibernate.connection.url">${hibernate_url}</property>
+		<!--property name="hibernate.connection.url">${hibernate_url}</property>
 		<property name="hibernate.connection.username">${hibernate_username}</property>
-		<property name="hibernate.connection.password">${hibernate_password}</property>
+		<property name="hibernate.connection.password">${hibernate_password}</property-->
+
+
+                <property name="hibernate.connection.url">${IP_MySQL_DB_APACHE}</property>
+                <property name="hibernate.connection.username">${NAME_MySQL_DB_APACHE}</property>
+                <property name="hibernate.connection.password">${PASS_MySQL_DB_APACHE}</property>
+
 
 		<property name="hibernate.hbm2ddl.auto">create-drop</property>
 
