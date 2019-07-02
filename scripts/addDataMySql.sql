@@ -1,4 +1,4 @@
-use lv316oms;
+use oms;
 
 
 insert into Roles(RoleName) values('Administrator');
