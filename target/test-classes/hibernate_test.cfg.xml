@@ -14,9 +14,9 @@
 		<property name="hibernate.connection.password">${hibernate_password}</property-->
 
 
-                <property name="hibernate.connection.url">${IP_MySQL_DB_APACHE}</property>
-                <property name="hibernate.connection.username">${NAME_MySQL_DB_APACHE}</property>
-                <property name="hibernate.connection.password">${PASS_MySQL_DB_APACHE}</property>
+                <property name="hibernate.connection.url">jdbc:mysql://10.26.34.198:99/oms</property>
+                <property name="hibernate.connection.username">lv419</property>
+                <property name="hibernate.connection.password">root</property>
 
 
 		<property name="hibernate.hbm2ddl.auto">create-drop</property>
