@@ -2,8 +2,8 @@ com/softserveinc/edu/oms/persistence/dao/DimensionDaoTest.class
 com/softserveinc/edu/oms/web/orderitem/model/OrderItemsPageModelTest.class
 com/softserveinc/edu/oms/web/orderitem/model/temporarydata/beans/TempOrderItemTest.class
 com/softserveinc/edu/oms/persistence/dao/CustomerTypeDaoTest.class
-com/softserveinc/edu/oms/persistence/dao/ProductDaoTest.class
 com/softserveinc/edu/oms/persistence/dao/UserDaoTest.class
+com/softserveinc/edu/oms/persistence/dao/ProductDaoTest.class
 com/softserveinc/edu/oms/persistence/dao/RegionDaoTest.class
 com/softserveinc/edu/oms/persistence/dao/OrderItemDaoTest.class
 com/softserveinc/edu/oms/persistence/dao/CleanUpDBTestCase.class

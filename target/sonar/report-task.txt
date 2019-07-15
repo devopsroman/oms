@@ -1,6 +1,0 @@
-projectKey=omska
-serverUrl=http://10.26.34.199:9000
-serverVersion=7.7.0.23042
-dashboardUrl=http://10.26.34.199:9000/dashboard?id=omska
-ceTaskId=AWujFHKaBNcvubro2CPt
-ceTaskUrl=http://10.26.34.199:9000/api/ce/task?id=AWujFHKaBNcvubro2CPt
