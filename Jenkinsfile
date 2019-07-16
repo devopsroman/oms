@@ -1,4 +1,4 @@
-node('docker-maven-build-slave1'') {
+node('docker-maven-build-slave1') {
   stage('Clone') {
     checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/devopsroman/oms.git']]]
 } 
