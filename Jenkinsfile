@@ -1,5 +1,5 @@
 node('centos') {
-  stage('Clone') {
+  stage('docker-maven-build-slave1'') {
     checkout scm: [$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/devopsroman/oms.git']]]
 } 
   stage('Maven') {
