@@ -9,15 +9,7 @@ node('docker-maven-build-slave1') {
       // **       in the global configuration.      
 } 
   stage('SonarQube') {
-      tool name: 'Sonar3', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-}
-  
-  stage('SonarQube analysis') {
-    withSonarQubeEnv('my-sonarqube-demo') {
-    sh "'${mvnHome}/bin/mvn' sonar:sonar"
-             // If SonarQube require authentication and token absent in Global Jenkins configuration
-            //sh "'${mvnHome}/bin/mvn' sonar:sonar -Dsonar.login=token_value"
-     	
+      mvn clean verify sonartool name: 'Sonar3', type: 'hudson.plugins.sonar.SonarRunnerInstallation':sonar 
 }
   
   stage('Maven') {
