@@ -1,4 +1,5 @@
-node('standalone-linux-slave1') {
+// node('standalone-linux-slave1') {
+node('docker-maven-build-slave1') {
   stage('Git clone') {
     git 'https://github.com/devopsroman/oms.git'
 } 
