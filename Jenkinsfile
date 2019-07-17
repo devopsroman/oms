@@ -17,7 +17,7 @@ node('docker-maven-build-slave1') {
     step([$class: 'ArtifactArchiver', artifacts: '**/target/*.war', fingerprint: true])
 }
   stage('Uploading artifact to Nexus') {
-    nexusArtifactUploader artifacts: [[artifactId: 'maven-deploy-plugin', classifier: '', file: '/home/jenkins/workspace/oms_lv419/target/OMS.war', type: 'war']], credentialsId: 'nexus', groupId: 'org.apache.maven.plugins', nexusUrl: '10.26.34.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'test1', version: '5.7.113'
+    nexusArtifactUploader artifacts: [[artifactId: 'maven-deploy-plugin', classifier: '', file: '/home/jenkins/workspace/oms_lv419/target/OMS.war', type: 'war']], credentialsId: 'nexus', groupId: 'org.apache.maven.plugins', nexusUrl: '10.26.34.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'test1', version: '5.7.114'
 }
   stage('Deploy to stage') {
     sshagent(['ssh_tomcat']) {
