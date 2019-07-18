@@ -1,0 +1,27 @@
+node('docker-maven-build-slave1') {
+  stage('Example') {
+        if (env.BRANCH_NAME == 'master') {
+            echo 'I only execute on the master branch'
+        } else {
+            echo 'I execute elsewhere'
+        }
+    }
+  
+  stage('Git clone') {
+    //git 'https://github.com/devopsroman/oms.git'
+    checkout scm
+} 
+   stage('SonarQube analysis') {
+    sh "mvn sonar:sonar"
+} 
+  stage('Build & Test') {
+    def mvnHome = tool 'M3'
+    sh "${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify"
+}
+  stage('Uploading artifact to Nexus') {
+    nexusArtifactUploader artifacts: [[artifactId: 'maven-deploy-plugin', classifier: '', file: '/home/jenkins/workspace/hhh_master/target/OMS.war', type: 'war']], credentialsId: 'nexus', groupId: 'org.apache.maven.plugins', nexusUrl: '10.26.34.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'test1', version: '16.8'
+}
+  stage('Deploy to stage') {
+    sshagent(['ssh_tomcat']) {
+    sh 'scp -r target/OMS.war root@10.26.34.145:/opt/tomcat/webapps'
+}}}
