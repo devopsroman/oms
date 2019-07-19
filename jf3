@@ -1,0 +1,83 @@
+properties([
+    gitLabConnection('gilabus'),
+    pipelineTriggers([
+        [
+            $class: 'GitLabPushTrigger',
+            branchFilterType: 'All',
+            triggerOnPush: true,
+            triggerOnMergeRequest: true,
+            triggerOpenMergeRequestOnPush: "never",
+            triggerOnNoteRequest: true,
+            noteRegex: "Jenkins please retry a build",
+            skipWorkInProgressMergeRequest: true,
+            //secretToken: project_token,
+            ciSkip: false,
+            setBuildDescription: true,
+            addNoteOnMergeRequest: true,
+            addCiMessage: true,
+            addVoteOnMergeRequest: true,
+            acceptMergeRequestOnSuccess: false,
+            branchFilterType: "NameBasedFilter",
+            includeBranchesSpec: "release/qat",
+            excludeBranchesSpec: "",
+        ]
+    ])
+])
+
+node('docker-maven-build-slave1') {
+     if (env.BRANCH_NAME == 'master') {
+            echo 'I only execute on the master branch'
+              stage('checkout scm /master') {
+              checkout scm
+} 
+   stage('SonarQube analysis') {
+    sh "mvn sonar:sonar"
+} 
+  stage('Build & Test') {
+    def mvnHome = tool 'M3'
+    sh "${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify"
+}
+  stage('Uploading artifact to Nexus') {
+    nexusArtifactUploader artifacts: [[artifactId: 'maven-deploy-plugin', classifier: '', file: '/home/jenkins/workspace/hhh_master/target/OMS.war', type: 'war']], credentialsId: 'nexus', groupId: 'org.apache.maven.plugins', nexusUrl: '10.26.34.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'test1', version: '16.21'
+}
+} 
+        if (env.BRANCH_NAME == 'develop') {
+            echo 'I only execute on the develop branch'
+              stage('checkout scm /develop') {
+    checkout scm
+} 
+   stage('SonarQube analysis') {
+    sh "mvn sonar:sonar"
+} 
+  stage('Build & Test') {
+    def mvnHome = tool 'M3'
+    sh "${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify"
+}
+  stage('Uploading artifact to Nexus') {
+    nexusArtifactUploader artifacts: [[artifactId: 'maven-deploy-plugin', classifier: '', file: '/home/jenkins/workspace/hhh_develop/target/OMS.war', type: 'war']], credentialsId: 'nexus', groupId: 'org.apache.maven.plugins', nexusUrl: '10.26.34.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'test1', version: '16.22'
+}
+  stage('Deploy to stage') {
+    sshagent(['ssh_tomcat']) {
+    sh 'scp -r target/OMS.war root@10.26.34.145:/opt/tomcat/webapps'
+}}
+        } 
+   if (env.BRANCH_NAME == 'feature'){
+            echo 'I execute elsewhere'
+            stage('checkout scm /feature') {
+    checkout scm
+} 
+   stage('SonarQube analysis') {
+    sh "mvn sonar:sonar"
+} 
+  stage('Build & Test') {
+    def mvnHome = tool 'M3'
+    sh "${mvnHome}/bin/mvn -B -Dmaven.test.failure.ignore verify"
+}
+  stage('Uploading artifact to Nexus') {
+    nexusArtifactUploader artifacts: [[artifactId: 'maven-deploy-plugin', classifier: '', file: '/home/jenkins/workspace/hhh_master/target/OMS.war', type: 'war']], credentialsId: 'nexus', groupId: 'org.apache.maven.plugins', nexusUrl: '10.26.34.246:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'test1', version: '16.23'
+}
+  stage('Deploy to stage') {
+    sshagent(['ssh_tomcat']) {
+    sh 'scp -r target/OMS.war root@10.26.34.145:/opt/tomcat/webapps'
+}}
+        }}
